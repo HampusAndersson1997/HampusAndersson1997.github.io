@@ -177,12 +177,6 @@ ul.plain li {
           </header>
 
           <main className="main-container">
-            <Section title="Skills">
-              <div className="tags">
-                {skills.map(skill => <Chip key={skill}>{skill}</Chip>)}
-              </div>
-            </Section>
-
             <Section title="Experience">
               <h3>Vialumina AB – Software Developer <em>(2024 – June 2025, Norrköping)</em></h3>
               <ul>
@@ -195,6 +189,12 @@ ul.plain li {
               <ul>
                 <li>Active member of the school board with focus on improving the educational environment and curriculum.</li>
               </ul>
+            </Section>
+
+            <Section title="Skills">
+              <div className="tags">
+                {skills.map(skill => <Chip key={skill}>{skill}</Chip>)}
+              </div>
             </Section>
 
             <Section title="Education">
