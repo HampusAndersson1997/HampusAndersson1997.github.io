@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Hampus Andersson – CV</title>
+<title>Hampus Andersson – Resume</title>
 
 <link rel="preconnect" href="https://fonts.gstatic.com" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
@@ -26,9 +26,7 @@
   --space-sm: 0.75rem;
 }
 
-*,
-*::before,
-*::after { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -163,10 +161,10 @@ ul.plain li {
         "TypeScript",
         "React",
         "MongoDB",
-        "SQL & DB‑design",
-        "Nätverk & säkerhet",
-        "Agila metoder",
-        "Problem‑lösning",
+        "SQL & DB design",
+        "Networking & Security",
+        "Agile Methodologies",
+        "Problem Solving",
         "AI / LLM / OCR"
       ];
 
@@ -174,58 +172,53 @@ ul.plain li {
         <>
           <header>
             <h1>Hampus Andersson</h1>
-            <p>Mjukvaruutvecklare &amp; AI‑entusiast</p>
-            <p>Norrköping&nbsp;|&nbsp;Sverige</p>
+            <p>Software Developer &amp; AI Enthusiast</p>
+            <p>Norrköping | Sweden</p>
           </header>
 
           <main className="main-container">
-            {/* Kontakt */}
-            <Section title="Kontakt">
+            <Section title="Contact">
               <ul className="plain">
-                <li>Adress: S:t&nbsp;Persgatan&nbsp;131A, 602&nbsp;30&nbsp;Norrköping</li>
-                <li>Telefon: <a href="tel:+46793324919">079&nbsp;332&nbsp;49&nbsp;19</a></li>
-                <li>E‑post: <a href="mailto:Andersson.Hampus97@gmail.com">Andersson.Hampus97@gmail.com</a></li>
-                <li>LinkedIn: <a href="https://www.linkedin.com/in/hampus-anderson-199a3a125">hampus‑anderson‑199a3a125</a></li>
+                <li>Address: S:t Persgatan 131A, 602 30 Norrköping</li>
+                <li>Phone: <a href="tel:+46793324919">+46 79 332 49 19</a></li>
+                <li>Email: <a href="mailto:Andersson.Hampus97@gmail.com">Andersson.Hampus97@gmail.com</a></li>
+                <li>LinkedIn: <a href="https://www.linkedin.com/in/hampus-anderson-199a3a125">hampus-anderson-199a3a125</a></li>
               </ul>
             </Section>
 
-            {/* Kompetenser */}
-            <Section title="Kompetenser">
+            <Section title="Skills">
               <div className="tags">
                 {skills.map(skill => <Chip key={skill}>{skill}</Chip>)}
               </div>
             </Section>
 
-            {/* Erfarenhet */}
-            <Section title="Erfarenhet">
-              <h3>Vialumina&nbsp;AB – Mjukvaruutvecklare <em>(2024 – juni 2025, Norrköping)</em></h3>
+            <Section title="Experience">
+              <h3>Vialumina AB – Software Developer <em>(2024 – June 2025, Norrköping)</em></h3>
               <ul>
-                <li>Utvecklade ett OCR‑system med <strong>99,99 % träffsäkerhet</strong> genom LLM‑tekniker, Vertex AI och Python.</li>
-                <li>Automatiserade dataflöde från tolkning till kundplattform och dokumenterade arkitekturen i ett visuellt 30‑stegsflöde.</li>
-                <li>Pilot‑POC som lade grunden för fortsatt AI‑utveckling.</li>
+                <li>Developed an OCR system with <strong>99.99% accuracy</strong> using LLM techniques, Vertex AI and Python.</li>
+                <li>Automated data pipeline from extraction to platform integration and documented full architecture in a 30-step visual workflow.</li>
+                <li>Served as technical proof-of-concept that laid the foundation for continued AI development.</li>
               </ul>
 
-              <h3>Mölk&nbsp;Yrkeshögskola – Ledningsarbete <em>(2023 – juni 2025, Linköping)</em></h3>
+              <h3>Mölk Polytechnic – Board Member <em>(2023 – June 2025, Linköping)</em></h3>
               <ul>
-                <li>Aktiv medlem i skolans ledningsgrupp med fokus på förbättring av utbildningsmiljön och kursinnehåll.</li>
+                <li>Active member of the school board with focus on improving the educational environment and curriculum.</li>
               </ul>
             </Section>
 
-            {/* Utbildning */}
-            <Section title="Utbildning">
-              <h3>Mölk&nbsp;Yrkeshögskola – Mjukvaruutveckling <em>(2023 – 2025, Linköping)</em></h3>
-              <p>Väl Godkänd i samtliga kurser: databaser &amp; nätverksprogrammering, OOP med C#, Python, JavaScript, agilt projektarbete m.m.</p>
+            <Section title="Education">
+              <h3>Mölk Polytechnic – Software Development <em>(2023 – 2025, Linköping)</em></h3>
+              <p>Graduated with distinction in all subjects: databases & networking, OOP with C#, Python, JavaScript, agile projects and more.</p>
 
-              <h3>Linköpings&nbsp;Universitet – Ekonomiprogrammet <em>(2021 – 2023, Linköping)</em></h3>
+              <h3>Linköping University – Economics Program <em>(2021 – 2023, Linköping)</em></h3>
 
-              <h3>Teknik&nbsp;Programmet – Design &amp; Produktutveckling <em>(2013 – 2016, Ronneby)</em></h3>
+              <h3>Technical High School – Design & Product Development <em>(2013 – 2016, Ronneby)</em></h3>
             </Section>
 
-            {/* Referenser */}
-            <Section title="Referenser">
+            <Section title="References">
               <ul className="plain">
-                <li>Jakob&nbsp;Palmgren – Mjukvaruutvecklare, Vialumina&nbsp;AB · 076‑775&nbsp;06&nbsp;29</li>
-                <li>Magnus&nbsp;Mölk – Utbildningsledare, Mölk&nbsp;Yrkeshögskola · 073‑532&nbsp;41&nbsp;27</li>
+                <li>Jakob Palmgren – Software Developer, Vialumina AB · +46 76 775 06 29</li>
+                <li>Magnus Mölk – Program Director, Mölk Polytechnic · +46 73 532 41 27</li>
               </ul>
             </Section>
           </main>
