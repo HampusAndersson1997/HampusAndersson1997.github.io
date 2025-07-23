@@ -197,10 +197,24 @@ ul.plain li {
               </div>
             </Section>
 
-            <section>
-              <h2>Sudoku Game</h2>
-              <iframe src="sudoku.html" width="500" height="500" style="border:1px solid #ccc;border-radius:12px"></iframe>
-            </section>
+            <Section title="Sudoku Game">
+              <iframe
+                src="sudoku.html"
+                width="500"
+                height="500"
+                style={{
+                  border: '1px solid #ccc',
+                  borderRadius: '12px',
+                  maxWidth: '100%',
+                  margin: '0 auto',
+                  display: 'block',
+                  background: '#fff'
+                }}
+                title="Sudoku"
+                loading="lazy"
+              ></iframe>
+              <p style={{textAlign:'center',marginTop:'1rem'}}>Sudoku</p>
+            </Section>
 
             <Section title="Education">
               <h3>Mölk Polytechnic – Software Development <em>(2023 – 2025, Linköping)</em></h3>
