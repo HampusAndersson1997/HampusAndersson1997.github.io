@@ -89,6 +89,10 @@ section h2 {
   box-shadow: var(--shadow-card);
   padding: var(--space-md) var(--space-lg);
   margin-top: var(--space-sm);
+  /* For extra polish on sudoku card: */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 ul.plain {
@@ -118,6 +122,34 @@ ul.plain li {
 
 .chip:hover { background: var(--clr-primary-dark); }
 
+.sudoku-iframe-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.sudoku-iframe-container iframe {
+  border: 1.5px solid #ccc;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1 / 1;
+  min-height: 540px;
+  background: #fff;
+  margin: 0 auto;
+  display: block;
+  box-shadow: 0 4px 24px 0 #0001;
+}
+
+/* Responsive padding for card */
+@media (max-width: 600px) {
+  .card {
+    padding: var(--space-md) var(--space-sm);
+  }
+}
+
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
   body {
     background-color: var(--clr-bg-dark);
@@ -197,24 +229,22 @@ ul.plain li {
               </div>
             </Section>
 
-            <Section title="Sudoku Game">
-              <iframe
-                src="sudoku.html"
-                width="500"
-                height="500"
-                style={{
-                  border: '1px solid #ccc',
-                  borderRadius: '12px',
-                  maxWidth: '100%',
-                  margin: '0 auto',
-                  display: 'block',
-                  background: '#fff'
-                }}
-                title="Sudoku"
-                loading="lazy"
-              ></iframe>
-              <p style={{textAlign:'center',marginTop:'1rem'}}>Sudoku</p>
-            </Section>
+            <section>
+              <h2>Sudoku Game</h2>
+              <div className="card">
+                <div className="sudoku-iframe-container">
+                  <iframe
+                    src="sudoku.html"
+                    title="Sudoku"
+                    loading="lazy"
+                    allowFullScreen
+                  ></iframe>
+                  <p style={{textAlign:'center',marginTop:'1.2rem', fontSize:'1.08rem', color:'#888'}}>
+                    Interactive Sudoku &ndash; built from scratch with HTML5 Canvas &amp; JavaScript.
+                  </p>
+                </div>
+              </div>
+            </section>
 
             <Section title="Education">
               <h3>Mölk Polytechnic – Software Development <em>(2023 – 2025, Linköping)</em></h3>
