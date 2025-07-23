@@ -1,219 +1,234 @@
 <!DOCTYPE html>
 <html lang="sv">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Hampus Andersson – CV</title>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hampus Andersson – CV</title>
 
-    <style>
-      :root {
-        --bg-light: #f8f9fa;
-        --bg-dark: #212529;
-        --fg-light: #212529;
-        --fg-dark: #f8f9fa;
-        --primary: #343a40;
-        --tag-bg-light: #e9ecef;
-        --tag-bg-dark: #495057;
-      }
-      body {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Helvetica, Arial, sans-serif;
-        line-height: 1.6;
-        background: var(--bg-light);
-        color: var(--fg-light);
-      }
-      header {
-        background: var(--primary);
-        color: #fff;
-        text-align: center;
-        padding: 2.5rem 1rem;
-      }
-      main {
-        max-width: 900px;
-        margin: 2rem auto;
-        padding: 0 1rem;
-      }
-      h1,
-      h2 {
-        margin-top: 0;
-        line-height: 1.2;
-      }
-      section {
-        margin-bottom: 2.25rem;
-      }
-      ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-      ul li {
-        margin-bottom: 0.5rem;
-      }
-      .tag {
-        display: inline-block;
-        padding: 0.3rem 0.65rem;
-        border-radius: 0.35rem;
-        background: var(--tag-bg-light);
-        margin: 0 0.5rem 0.5rem 0;
-        font-size: 0.85rem;
-        white-space: nowrap;
-      }
-      @media (prefers-color-scheme: dark) {
-        body {
-          background: var(--bg-dark);
-          color: var(--fg-dark);
-        }
-        header {
-          background: #000;
-        }
-        .tag {
-          background: var(--tag-bg-dark);
-        }
-      }
-    </style>
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 
-    <script defer src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script defer src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script defer src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  </head>
+<style>
+:root {
+  --clr-bg-light: #fdfdfd;
+  --clr-bg-dark: #121212;
+  --clr-fg-light: #1e1e1e;
+  --clr-fg-dark: #eaeaea;
+  --clr-primary: #2563eb; 
+  --clr-primary-dark: #1e40af; 
+  --radius-lg: 0.75rem;
+  --radius-sm: 0.375rem;
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-card-dark: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --space-xl: 4rem;
+  --space-lg: 2.5rem;
+  --space-md: 1.5rem;
+  --space-sm: 0.75rem;
+}
 
-  <body>
-    <div id="root"></div>
+*,
+*::before,
+*::after { box-sizing: border-box; }
 
-    <script type="text/babel">
-      const Tag = ({ children }) => <span className="tag">{children}</span>;
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  background-color: var(--clr-bg-light);
+  color: var(--clr-fg-light);
+  -webkit-font-smoothing: antialiased;
+}
 
-      function CV() {
-        return (
-          <>
-            <header>
-              <h1>Hampus Andersson</h1>
-              <p>Mjukvaruutvecklare &amp; AI‑entusiast</p>
-              <p>Norrköping&nbsp;|&nbsp;Sverige</p>
-            </header>
+a { color: var(--clr-primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
 
-            <main>
-              {/* Kontakt */}
-              <section>
-                <h2>Kontakt</h2>
-                <ul>
-                  <li>Adress: S:t&nbsp;Persgatan&nbsp;131A, 602 30&nbsp;Norrköping</li>
-                  <li>
-                    Telefon: <a href="tel:+46793324919">079&nbsp;332&nbsp;49&nbsp;19</a>
-                  </li>
-                  <li>
-                    E‑post:
-                    <a href="mailto:Andersson.Hampus97@gmail.com">
-                      Andersson.Hampus97@gmail.com
-                    </a>
-                  </li>
-                  <li>
-                    LinkedIn:
-                    <a href="https://www.linkedin.com/in/hampus-anderson-199a3a125">
-                      hampus‑anderson‑199a3a125
-                    </a>
-                  </li>
-                </ul>
-              </section>
+header {
+  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
+  color: #fff;
+  text-align: center;
+  padding: var(--space-lg) var(--space-sm);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
 
-              {/* Kompetenser */}
-              <section>
-                <h2>Kompetenser</h2>
-                {[
-                  "C#",
-                  "Python",
-                  "TypeScript",
-                  "React",
-                  "MongoDB",
-                  "SQL & DB‑design",
-                  "Nätverk & säkerhet",
-                  "Agila metoder",
-                  "Problem‑lösning",
-                  "AI / LLM / OCR"
-                ].map((skill) => (
-                  <Tag key={skill}>{skill}</Tag>
-                ))}
-              </section>
+header h1 {
+  margin: 0 0 .25rem;
+  font-size: clamp(2rem, 4vw + .5rem, 3rem);
+  font-weight: 600;
+}
 
-              {/* Erfarenhet */}
-              <section>
-                <h2>Erfarenhet</h2>
+header p {
+  margin: 0.25rem 0;
+  font-size: 1.125rem;
+}
 
-                <h3>Vialumina&nbsp;AB – Mjukvaruutvecklare</h3>
-                <p>
-                  <em>2024&nbsp;–&nbsp;juni&nbsp;2025, Norrköping</em>
-                </p>
-                <ul>
-                  <li>
-                    Utvecklade ett OCR‑system med <strong>99,99 % träffsäkerhet</strong>{" "}
-                    genom att kombinera LLM‑tekniker, Vertex AI och Python.
-                  </li>
-                  <li>
-                    Automatiserade dataflöde från tolkning till kundplattform och
-                    dokumenterade arkitekturen i ett visuellt 30‑stegsflöde.
-                  </li>
-                  <li>
-                    Resultatet fungerade som pilot‑POC och lade grunden för AI‑utvecklingen.
-                  </li>
-                </ul>
+.main-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-sm);
+}
 
-                <h3>Mölk&nbsp;Yrkeshögskola – Ledningsarbete</h3>
-                <p>
-                  <em>2023&nbsp;–&nbsp;juni&nbsp;2025, Linköping</em>
-                </p>
-                <ul>
-                  <li>
-                    Aktiv medlem i skolans ledningsgrupp med fokus på förbättring av
-                    utbildningsmiljön och kursinnehåll.
-                  </li>
-                </ul>
-              </section>
+section {
+  margin-bottom: var(--space-xl);
+}
 
-              {/* Utbildning */}
-              <section>
-                <h2>Utbildning</h2>
+section h2 {
+  margin: 0 0 var(--space-sm);
+  font-size: 1.625rem;
+  font-weight: 600;
+  border-bottom: 3px solid var(--clr-primary);
+  display: inline-block;
+  padding-bottom: 0.25rem;
+}
 
-                <h3>Mölk&nbsp;Yrkeshögskola – Mjukvaruutveckling</h3>
-                <p>
-                  <em>2023&nbsp;–&nbsp;2025, Linköping</em>
-                </p>
-                <p>
-                  Väl Godkänd i samtliga kurser: databaser &amp; nätverksprogrammering, OOP
-                  med C#, Python, JavaScript, agilt projektarbete m.m.
-                </p>
+.card {
+  background-color: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-md) var(--space-lg);
+  margin-top: var(--space-sm);
+}
 
-                <h3>Linköpings&nbsp;Universitet – Ekonomiprogrammet</h3>
-                <p>
-                  <em>2021&nbsp;–&nbsp;2023, Linköping</em>
-                </p>
+ul.plain {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-                <h3>Teknik&nbsp;Programmet – Design &amp; Produktutveckling</h3>
-                <p>
-                  <em>2013&nbsp;–&nbsp;2016, Ronneby</em>
-                </p>
-              </section>
+ul.plain li {
+  margin-bottom: 0.5rem;
+}
 
-              {/* Referenser */}
-              <section>
-                <h2>Referenser</h2>
-                <ul>
-                  <li>
-                    Jakob&nbsp;Palmgren – Mjukvaruutvecklare, Vialumina&nbsp;AB ·
-                    076‑775&nbsp;06&nbsp;29
-                  </li>
-                  <li>
-                    Magnus&nbsp;Mölk – Utbildningsledare, Mölk&nbsp;Yrkeshögskola ·
-                    073‑532&nbsp;41&nbsp;27
-                  </li>
-                </ul>
-              </section>
-            </main>
-          </>
-        );
-      }
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
 
-      ReactDOM.createRoot(document.getElementById("root")).render(<CV />);
-    </script>
-  </body>
+.chip {
+  background: var(--clr-primary);
+  color: #fff;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.825rem;
+  transition: background 0.2s ease;
+}
+
+.chip:hover { background: var(--clr-primary-dark); }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--clr-bg-dark);
+    color: var(--clr-fg-dark);
+  }
+  header {
+    box-shadow: none;
+  }
+  .card {
+    background-color: #1f1f1f;
+    box-shadow: var(--shadow-card-dark);
+  }
+}
+
+.fade-in { opacity: 0; animation: fadeIn 0.6s forwards ease-in-out; }
+@keyframes fadeIn { to { opacity: 1; } }
+</style>
+
+<script defer src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script defer src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script defer src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const Chip = ({ children }) => <span className="chip">{children}</span>;
+
+    const Section = ({ title, children }) => (
+      <section className="fade-in">
+        <h2>{title}</h2>
+        <div className="card">{children}</div>
+      </section>
+    );
+
+    function CV() {
+      const skills = [
+        "C#",
+        "Python",
+        "TypeScript",
+        "React",
+        "MongoDB",
+        "SQL & DB‑design",
+        "Nätverk & säkerhet",
+        "Agila metoder",
+        "Problem‑lösning",
+        "AI / LLM / OCR"
+      ];
+
+      return (
+        <>
+          <header>
+            <h1>Hampus Andersson</h1>
+            <p>Mjukvaruutvecklare &amp; AI‑entusiast</p>
+            <p>Norrköping&nbsp;|&nbsp;Sverige</p>
+          </header>
+
+          <main className="main-container">
+            {/* Kontakt */}
+            <Section title="Kontakt">
+              <ul className="plain">
+                <li>Adress: S:t&nbsp;Persgatan&nbsp;131A, 602&nbsp;30&nbsp;Norrköping</li>
+                <li>Telefon: <a href="tel:+46793324919">079&nbsp;332&nbsp;49&nbsp;19</a></li>
+                <li>E‑post: <a href="mailto:Andersson.Hampus97@gmail.com">Andersson.Hampus97@gmail.com</a></li>
+                <li>LinkedIn: <a href="https://www.linkedin.com/in/hampus-anderson-199a3a125">hampus‑anderson‑199a3a125</a></li>
+              </ul>
+            </Section>
+
+            {/* Kompetenser */}
+            <Section title="Kompetenser">
+              <div className="tags">
+                {skills.map(skill => <Chip key={skill}>{skill}</Chip>)}
+              </div>
+            </Section>
+
+            {/* Erfarenhet */}
+            <Section title="Erfarenhet">
+              <h3>Vialumina&nbsp;AB – Mjukvaruutvecklare <em>(2024 – juni 2025, Norrköping)</em></h3>
+              <ul>
+                <li>Utvecklade ett OCR‑system med <strong>99,99 % träffsäkerhet</strong> genom LLM‑tekniker, Vertex AI och Python.</li>
+                <li>Automatiserade dataflöde från tolkning till kundplattform och dokumenterade arkitekturen i ett visuellt 30‑stegsflöde.</li>
+                <li>Pilot‑POC som lade grunden för fortsatt AI‑utveckling.</li>
+              </ul>
+
+              <h3>Mölk&nbsp;Yrkeshögskola – Ledningsarbete <em>(2023 – juni 2025, Linköping)</em></h3>
+              <ul>
+                <li>Aktiv medlem i skolans ledningsgrupp med fokus på förbättring av utbildningsmiljön och kursinnehåll.</li>
+              </ul>
+            </Section>
+
+            {/* Utbildning */}
+            <Section title="Utbildning">
+              <h3>Mölk&nbsp;Yrkeshögskola – Mjukvaruutveckling <em>(2023 – 2025, Linköping)</em></h3>
+              <p>Väl Godkänd i samtliga kurser: databaser &amp; nätverksprogrammering, OOP med C#, Python, JavaScript, agilt projektarbete m.m.</p>
+
+              <h3>Linköpings&nbsp;Universitet – Ekonomiprogrammet <em>(2021 – 2023, Linköping)</em></h3>
+
+              <h3>Teknik&nbsp;Programmet – Design &amp; Produktutveckling <em>(2013 – 2016, Ronneby)</em></h3>
+            </Section>
+
+            {/* Referenser */}
+            <Section title="Referenser">
+              <ul className="plain">
+                <li>Jakob&nbsp;Palmgren – Mjukvaruutvecklare, Vialumina&nbsp;AB · 076‑775&nbsp;06&nbsp;29</li>
+                <li>Magnus&nbsp;Mölk – Utbildningsledare, Mölk&nbsp;Yrkeshögskola · 073‑532&nbsp;41&nbsp;27</li>
+              </ul>
+            </Section>
+          </main>
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<CV />);
+  </script>
+</body>
 </html>
