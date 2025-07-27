@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sudoku</title>
+  <style>
+    :root {
+      --board-size: 450px;
+    }
+    body {
+      margin: 0;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: system-ui, sans-serif;
+      background: #f3f4f6;
+      gap: 1rem;
+    }
+    canvas {
+      border: 2px solid #374151;
+      background: #fff;
+      touch-action: none;
+      width: var(--board-size);
+      height: var(--board-size);
+      display: block;
+    }
+    #controls { display: flex; gap: .5rem; }
+    button {
+      padding: .5rem 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: .375rem;
+      cursor: pointer;
+      background: #2563eb;
+      color: #fff;
+      transition: opacity .15s ease;
+    }
+    button:hover { opacity: .85; }
+    button:active { opacity: .75; }
+  </style>
+</head>
+<body>
+  <canvas id="board" width="450" height="450"></canvas>
+  <div id="controls">
+    <button id="new-puzzle">Nytt pussel</button>
+    <button id="clear">Rensa</button>
+  </div>
+  <script>
+    const canvas = document.getElementById('board');
+    const ctx = canvas.getContext('2d');
+    const CSS_PX = 450;
+    const CELL_PX = CSS_PX / 9;
+    function ensureHiDPI () {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width  = CSS_PX * dpr;
+      canvas.height = CSS_PX * dpr;
+      canvas.style.width  = CSS_PX + 'px';
+      canvas.style.height = CSS_PX + 'px';
+      ctx.reset?.();
+      ctx.setTransform(1,0,0,1,0,0); 
+      ctx.scale(dpr, dpr);
+    }
+    ensureHiDPI();
+    window.addEventListener('resize', ensureHiDPI);
+    const puzzles = [
+      '530070000600195000098000060800060003400803001700020006060000280000419005000080079',
+      '003020600900305001001806400008102900700000008006708200002609500800203009005010300'
+    ];
+    let grid   = Array.from({ length: 9 }, () => Array(9).fill(0));
+    let fixed  = Array.from({ length: 9 }, () => Array(9).fill(false));
+    function loadPuzzle (str) {
+      [...str].forEach((ch, i) => {
+        const r = Math.floor(i / 9);
+        const c = i % 9;
+        const v = Number(ch);
+        grid[r][c]  = v;
+        fixed[r][c] = v !== 0;
+      });
+      selected = null;
+      numSelected = null;
+      highlightNewCell = null;
+      draw();
+    }
+    let selected = null;
+    let numSelected = null;
+    let highlightNewCell = null;
+    function draw () {
+      ctx.clearRect(0, 0, CSS_PX, CSS_PX);
+      if (numSelected) {
+        ctx.save();
+        ctx.globalAlpha = 0.16;
+        ctx.fillStyle = '#2563eb';
+        for (let r = 0; r < 9; r++) for (let c = 0; c < 9; c++) {
+          if (grid[r][c] === numSelected) {
+            ctx.fillRect(0, r * CELL_PX, CSS_PX, CELL_PX);
+            ctx.fillRect(c * CELL_PX, 0, CELL_PX, CSS_PX);
+          }
+        }
+        ctx.restore();
+      }
+      if (numSelected) {
+        ctx.save();
+        ctx.globalAlpha = 0.18;
+        ctx.fillStyle = '#38bdf8';
+        for (let r = 0; r < 9; r++) for (let c = 0; c < 9; c++) {
+          if (!grid[r][c] && isAllowed(r, c, numSelected)) {
+            ctx.fillRect(c * CELL_PX, r * CELL_PX, CELL_PX, CELL_PX);
+          }
+        }
+        ctx.restore();
+      }
+      if (selected) {
+        ctx.save();
+        ctx.globalAlpha = 0.20;
+        ctx.fillStyle = '#2563eb';
+        ctx.fillRect(selected.c * CELL_PX, selected.r * CELL_PX, CELL_PX, CELL_PX);
+        ctx.restore();
+        ctx.save();
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = '#2563eb';
+        ctx.strokeRect(selected.c * CELL_PX + 2, selected.r * CELL_PX + 2, CELL_PX - 4, CELL_PX - 4);
+        ctx.restore();
+      }
+      if (highlightNewCell) {
+        let { r, c, v } = highlightNewCell;
+        ctx.save();
+        ctx.globalAlpha = 0.22;
+        ctx.fillStyle = '#2563eb';
+        ctx.fillRect(0, r * CELL_PX, CSS_PX, CELL_PX);
+        ctx.fillRect(c * CELL_PX, 0, CELL_PX, CSS_PX);
+        ctx.globalAlpha = 0.18;
+        ctx.fillStyle = '#38bdf8';
+        for (let rr = 0; rr < 9; rr++) for (let cc = 0; cc < 9; cc++) {
+          if (!grid[rr][cc] && isAllowed(rr, cc, v)) {
+            ctx.fillRect(cc * CELL_PX, rr * CELL_PX, CELL_PX, CELL_PX);
+          }
+        }
+        ctx.restore();
+        ctx.save();
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = '#2563eb';
+        ctx.strokeRect(c * CELL_PX + 2, r * CELL_PX + 2, CELL_PX - 4, CELL_PX - 4);
+        ctx.restore();
+      }
+      ctx.strokeStyle = '#1f2937';
+      for (let i = 0; i <= 9; i++) {
+        ctx.lineWidth = i % 3 === 0 ? 2 : 1;
+        ctx.beginPath();
+        ctx.moveTo(i * CELL_PX, 0);
+        ctx.lineTo(i * CELL_PX, CSS_PX);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(0, i * CELL_PX);
+        ctx.lineTo(CSS_PX, i * CELL_PX);
+        ctx.stroke();
+      }
+      ctx.font = '22px system-ui, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      for (let r = 0; r < 9; r++) {
+        for (let c = 0; c < 9; c++) {
+          const v = grid[r][c];
+          if (!v) continue;
+          if (
+            (numSelected && v === numSelected) ||
+            (highlightNewCell && r === highlightNewCell.r && c === highlightNewCell.c) ||
+            (selected && selected.r === r && selected.c === c)
+          ) {
+            ctx.fillStyle = '#2563eb';
+          } else if (fixed[r][c]) {
+            ctx.fillStyle = '#111827';
+          } else {
+            ctx.fillStyle = '#4f46e5';
+          }
+          ctx.fillText(v, c * CELL_PX + CELL_PX / 2, r * CELL_PX + CELL_PX / 2);
+        }
+      }
+    }
+    function isAllowed (r, c, v) {
+      for (let i = 0; i < 9; i++) if (grid[r][i] === v || grid[i][c] === v) return false;
+      let br = Math.floor(r / 3) * 3, bc = Math.floor(c / 3) * 3;
+      for (let i = br; i < br + 3; i++) for (let j = bc; j < bc + 3; j++)
+        if (grid[i][j] === v) return false;
+      return true;
+    }
+    function cellFromEvent (evt) {
+      const rect = canvas.getBoundingClientRect();
+      const x = evt.clientX - rect.left;
+      const y = evt.clientY - rect.top;
+      return {
+        r: Math.floor(y / (rect.height / 9)),
+        c: Math.floor(x / (rect.width  / 9))
+      };
+    }
+    canvas.addEventListener('pointerdown', (evt) => {
+      highlightNewCell = null;
+      const { r, c } = cellFromEvent(evt);
+      if (grid[r][c]) {
+        numSelected = grid[r][c];
+        selected = { r, c };
+      } else if (!fixed[r][c]) {
+        selected = { r, c };
+        numSelected = null;
+      } else {
+        selected = null;
+        numSelected = null;
+      }
+      draw();
+    });
+    window.addEventListener('keydown', (evt) => {
+      if (numSelected) {
+        if (evt.key === 'Escape') {
+          numSelected = null;
+          highlightNewCell = null;
+          draw();
+        }
+        return;
+      }
+      if (!selected) return;
+      const { r, c } = selected;
+      if (evt.key >= '1' && evt.key <= '9') {
+        if (isAllowed(r, c, Number(evt.key))) {
+          grid[r][c] = Number(evt.key);
+          highlightNewCell = { r, c, v: Number(evt.key) };
+          selected = { r, c }; // Behåll markerad!
+          numSelected = null;
+          draw();
+          if (isSolved()) setTimeout(() => alert('🎉 Sudoku klar!'), 10);
+        }
+      } else if (evt.key === 'Backspace' || evt.key === '0') {
+        grid[r][c] = 0;
+        draw();
+      }
+    });
+    const range = [...Array(9).keys()];
+    function isSolved () {
+      for (let i of range) {
+        if (!validSet(row(i)) || !validSet(col(i)) || !validSet(box(i))) return false;
+      }
+      return true;
+    }
+    const validSet = (arr) => new Set(arr).size === 9 && !arr.includes(0);
+    const row      = (r) => grid[r];
+    const col      = (c) => grid.map(row => row[c]);
+    const box      = (b) => {
+      const br = Math.floor(b / 3) * 3;
+      const bc = (b % 3) * 3;
+      return [].concat(...grid.slice(br, br + 3).map(r => r.slice(bc, bc + 3)));
+    };
+    document.getElementById('new-puzzle').addEventListener('click', () => {
+      const idx = Math.floor(Math.random() * puzzles.length);
+      loadPuzzle(puzzles[idx]);
+      highlightNewCell = null;
+    });
+    document.getElementById('clear').addEventListener('click', () => {
+      range.forEach(r => range.forEach(c => { if (!fixed[r][c]) grid[r][c] = 0; }));
+      selected = null;
+      numSelected = null;
+      highlightNewCell = null;
+      draw();
+    });
+    loadPuzzle(puzzles[0]);
+  </script>
+</body>
+</html>

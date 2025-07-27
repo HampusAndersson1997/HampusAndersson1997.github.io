@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hampus Andersson – Resume</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --clr-bg-light: #fdfdfd;
+  --clr-bg-dark: #121212;
+  --clr-fg-light: #1e1e1e;
+  --clr-fg-dark: #eaeaea;
+  --clr-primary: #3b82f6;
+  --clr-primary-dark: #1e3a8a;
+  --radius-lg: 0.75rem;
+  --radius-sm: 0.375rem;
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-card-dark: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --space-xl: 4rem;
+  --space-lg: 2.5rem;
+  --space-md: 1.5rem;
+  --space-sm: 0.75rem;
+  --fz-base: 16px;
+  --fz-lg: 18px;
+  --fz-sm: 14px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: var(--fz-base); }
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.75;
+  background-color: var(--clr-bg-light);
+  color: var(--clr-fg-light);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--clr-primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+header {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--clr-primary-dark) 95%, transparent) 0%, color-mix(in srgb, var(--clr-primary) 85%, transparent) 100%);
+  color: #fff;
+  text-align: center;
+  padding: var(--space-lg) var(--space-sm);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+header h1 { margin: 0; font-size: clamp(2rem, 4vw + .5rem, 3rem); font-weight: 700; }
+header p { margin: 0.25rem 0; font-size: var(--fz-lg); }
+.main-container { max-width: 960px; margin: 0 auto; padding: var(--space-xl) var(--space-sm); }
+section { margin-bottom: var(--space-xl); }
+section h2 { margin-bottom: var(--space-sm); font-size: 1.75rem; font-weight: 600; border-bottom: 3px solid var(--clr-primary); display: inline-block; padding-bottom: 0.25rem; }
+section h3 { margin: var(--space-sm) 0; font-size: 1.25rem; font-weight: 500; color: var(--clr-primary-dark); }
+.card {
+  background-color: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-md) var(--space-lg);
+  margin-top: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+ul, p { margin: var(--space-sm) 0; font-size: var(--fz-base); }
+ul.plain { list-style: none; padding: 0; }
+ul.plain li { margin-bottom: 0.5rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chip { background: var(--clr-primary); color: #fff; padding: 0.35rem 0.75rem; border-radius: var(--radius-sm); font-size: var(--fz-sm); font-weight: 500; }
+.sudoku-iframe-container {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sudoku-iframe-container iframe {
+  border: 1.5px solid #ccc;
+  border-radius: 16px;
+  width: 100%;
+  height: 550px;
+  aspect-ratio: 1 / 1;
+  background: #fff;
+  box-shadow: 0 4px 24px 0 #0001;
+  overflow: hidden;
+}
+.sudoku-iframe-container iframe { border: 1.5px solid #ccc; border-radius: 16px; width: 100%; max-width: 500px; aspect-ratio: 1 / 1; background: #fff; box-shadow: 0 4px 24px 0 #0001; }
+
+.image-sym-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: var(--space-lg);
+  margin-bottom: 2rem; 
+}
+.image-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 1.2rem 2rem 1rem 2rem; 
+  min-height: unset;
+}
+.image-card img {
+  width: 100%;
+  max-width: 480px;
+  min-width: 260px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.2rem;
+  background: #fff;
+  box-shadow: 0 2px 10px 0 #0001;
+  object-fit: contain;
+  display: block;
+}
+.image-card p {
+  font-size: 16px;
+  color: #444;
+  text-align: left;
+  margin: 0;
+  min-height: unset;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.nda-note {
+  font-size: 14px;
+  color: #888;
+}
+@media (max-width: 600px) {
+  .main-container { padding: var(--space-lg) var(--space-sm); }
+  .image-sym-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+  .image-card { padding: 1.2rem 0.75rem 1rem 0.75rem; min-height: unset; }
+  .image-card img { max-width: 100%; }
+}
+@media (prefers-color-scheme: dark) {
+  body { background-color: var(--clr-bg-dark); color: var(--clr-fg-dark); }
+  .card, .image-card { background-color: #1f1f1f; box-shadow: var(--shadow-card-dark); }
+}
+.fade-in { opacity: 0; animation: fadeIn 0.6s forwards ease-in-out; }
+@keyframes fadeIn { to { opacity: 1; } }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Hampus Andersson</h1>
+    <p>Software Developer &amp; AI Enthusiast</p>
+    <p>Norrköping | Sweden</p>
+  </header>
+  <main class="main-container">
+    <section class="fade-in">
+      <h2>Demo Results</h2>
+      <div class="image-sym-grid">
+        <div class="card image-card">
+          <img src="AI%20Portfolio%20on%20ask.png" alt="Visual AI Portfolio Demo" />
+          <p>
+            Visual AI Portfolio<br>
+            (Demo – fake data, blurred text)<br>
+            For more details or a walkthrough,<br>
+            contact me (within NDA limitations).
+          </p>
+        </div>
+        <div class="card image-card">
+          <img src="piechart.png" alt="Pie Chart – OCR and analysis" />
+          <p>
+            Pie Chart – OCR &amp; analysis<br>
+            (1,000 pages, 250 cars – fake data)<br>
+            For more details or a walkthrough,<br>
+            contact me (within NDA limitations).
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="fade-in">
+      <h2>Experience</h2>
+      <div class="card">
+        <h3>Vialumina AB – Software Developer <em>(2024 – June 2025, Norrköping)</em></h3>
+        <ul>
+          <li>Developed an OCR system with <strong>99.99% accuracy</strong> using LLM techniques, Vertex AI and Python.</li>
+          <li>Automated data pipeline from extraction to platform integration and documented full architecture in a 50-step visual workflow.</li>
+          <li>Served as technical proof-of-concept that laid the foundation for continued AI development.</li>
+        </ul>
+        <h3>Mölk Polytechnic – Board Member <em>(2023 – June 2025, Linköping)</em></h3>
+        <ul>
+          <li>Active board member focusing on curriculum and environment improvements.</li>
+        </ul>
+      </div>
+    </section>
+    <section class="fade-in">
+      <h2>Skills</h2>
+      <div class="card">
+        <div class="tags">
+          <span class="chip">C#</span>
+          <span class="chip">Python</span>
+          <span class="chip">TypeScript</span>
+          <span class="chip">React</span>
+          <span class="chip">MongoDB</span>
+          <span class="chip">SQL &amp; DB design</span>
+          <span class="chip">Networking &amp; Security</span>
+          <span class="chip">Agile Methodologies</span>
+          <span class="chip">Problem Solving</span>
+          <span class="chip">AI / LLM / OCR</span>
+          <span class="chip">RAG</span>
+        </div>
+      </div>
+    </section>
+    <section class="fade-in">
+      <h2>Sudoku Game</h2>
+      <div class="card">
+        <div class="sudoku-iframe-container">
+          <iframe src="sudoku.html" title="Sudoku" loading="lazy" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+    <section class="fade-in">
+      <h2>Education</h2>
+      <div class="card">
+        <h3>Mölk Polytechnic – Software Development <em>(2023 – 2025, Linköping)</em></h3>
+        <p>Graduated with distinction in databases, networking, OOP, Python, JavaScript, and agile practices.</p>
+        <h3>Linköping University – Economics Program <em>(2021 – 2023, Linköping)</em></h3>
+        <p>Studied management, marketing, accounting, microeconomics, and macroeconomics.</p>
+      </div>
+    </section>
+    <section class="fade-in">
+      <h2>Contact</h2>
+      <div class="card">
+        <ul class="plain">
+          <li>Address: S:t Persgatan 131A, 602 30 Norrköping</li>
+          <li>Phone: <a href="tel:+46793324919">+46 79 332 49 19</a></li>
+          <li>Email: <a href="mailto:Andersson.Hampus97@gmail.com">Andersson.Hampus97@gmail.com</a></li>
+          <li>LinkedIn: <a href="https://www.linkedin.com/in/hampus-andersson-199a3a125">hampus-andersson-199a3a125</a></li>
+        </ul>
+      </div>
+    </section>
+    <section class="fade-in">
+      <h2>References</h2>
+      <div class="card">
+        <ul class="plain">
+          <li>Jakob Palmgren – Software Developer, Vialumina AB · +46 76 775 06 29</li>
+          <li>Magnus Mölk – Program Director, Mölk Polytechnic · +46 73 532 41 27</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
